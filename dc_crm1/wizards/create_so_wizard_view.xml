@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="create_so_wizard_form_view" model="ir.ui.view">
+            <field name="name">create.so.wizard.form</field>
+            <field name="model">create.so.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="crm_id" />
+                            <field name="sale_order_id" />
+                            <button string="Đi tới cửa sổ đơn hàng" name="open_so" type="object" class="oe_highlight" 
+                                attrs="{'invisible':[('sale_order_id','=',False)]}"
+                            /> 
+                        </group>
+                        <group>
+                            <!-- <field name="from_date" />
+                            <field
+                            name="to_date" />
+                            <field name="phone" />
+                            <field name="omiid" />
+                            <field
+                            name="status_code" /> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="line" string="line">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="order_id" invisible="1"/>
+                                    <field name="crm_product_line_id" />
+                                    <field name="name" invisible="1"/>
+                                    <field name="product_id"  domain="[('sale_ok','=',True),('categ_id','child_of',select_categ_id)]" context="{'dc_search_exclude_child_of':1}"/>
+                                    <field name="select_categ_id" />
+                                    <field name="categ_id" invisible="1"/>
+                                    <!-- <field name="product_custom_attribute_value_ids"
+                                    invisible="1"/>
+                            <field
+                                    name="product_no_variant_attribute_value_ids" invisible="1"/>
+                                    <field name="name" widget="section_and_note_text"/> -->
+                                    <field name="qty_done" />
+                                    <field name="qty_remain" />
+                                    <field name="product_uom_qty" />
+                                    <field name="product_uom" />
+                                    <field name="price_unit" />
+                                    <field name="tax_id" readonly="0" widget="many2many_tags" />
+                                    <field name="discount" groups="sale.group_discount_per_so_line" />
+                                    <field name="price_subtotal" widget="monetary" />
+                                    <field name="price_total" widget="monetary" />
+                                    <!-- <field name="state" invisible="1"/> -->
+                                    <!-- <field name="invoice_status" invisible="1"/>
+                            <field
+                                    name="customer_lead" invisible="1"/> -->
+                                    <field name="currency_id" />
+                                    <field name="company_id" />
+                                    <!-- <field name="price_tax" invisible="1"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Tạo báo giá" name="action_create_quotation" type="object"
+                            class="oe_highlight" />
+                        <button string="Tạo đơn hàng" name="action_create_so" type="object"
+                            class="oe_highlight" />
+                        <button string="Hủy" class="btn btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_so_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tạo đơn hàng</field>
+            <field name="res_model">create.so.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <act_window
+                id="action_partner_create_so_wizard"
+                name="Omicall
+        Wizard"
+                src_model="res.partner"
+                res_model="create.so.wizard"
+        view_type="form" 
+                view_mode="form"
+                target="new"
+        key2="client_action_multi"
+                /> -->
+    </data>
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+omi_log_access,omi_log_access,model_omi_log,,1,1,1,1
+access_crm_product_line,access_crm_product_line,model_crm_product_line,,1,1,1,1
+access_crm_product_line_report,access_crm_product_line_report,model_crm_product_line_report,,1,1,1,1
+access_crm_connection,access_crm_connection,model_crm_connection,,1,1,1,1
+

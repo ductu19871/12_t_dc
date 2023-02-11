@@ -1,0 +1,195 @@
+<odoo>
+
+    <record id="dc_selection_01" model="dc.selection">
+        <field name="code">create_lead</field>
+        <field name="name">Tạo tiềm năng</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+
+
+    <record id="dc_selection_0" model="dc.selection">
+        <field name="code">create_crm</field>
+        <field name="name">Tạo cơ hội</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+
+
+    <record id="dc_selection_1" model="dc.selection">
+        <field name="code">create_contact</field>
+        <field name="name">Tạo LH mới</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+    <record id="dc_selection_2" model="dc.selection">
+        <field name="code">update_phone</field>
+        <field name="name">Tạo số điện thoại (phone)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+    <record id="dc_selection_3" model="dc.selection">
+        <field name="code">update_mobile</field>
+        <field name="name">Tạo di động (mobile)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+
+    <record id="dc_selection_4" model="dc.selection">
+        <field name="code">create_sub_phone</field>
+        <field name="name">Tạo SĐT phụ (phone)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+
+    <record id="dc_selection_5" model="dc.selection">
+        <field name="code">create_sub_mobile</field>
+        <field name="name">Tạo di động phụ (mobile)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+    </record>
+    
+    <record id="dc_selection_tl_report_wizard_0" model="dc.selection">
+        <field name="code">select_categ_id</field>
+        <field name="name">Nhóm theo Nhóm Chọn Sản Phẩm</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+    <record id="dc_selection_tl_report_wizard_1" model="dc.selection">
+        <field name="code">product_id</field>
+        <field name="name">Nhóm theo Sản Phẩm</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+
+    <record id="dc_selection_tl_report_wizard_2" model="dc.selection">
+        <field name="code">partner_id</field>
+        <field name="name">Nhóm theo khách hàng</field>
+        <field name="model">tl.report.wizard</field>
+        <!-- <field name="type">update_phone_number</field> -->
+    </record>
+    
+    <record id="dc_selection_tl_report_wizard_3" model="dc.selection">
+        <field name="code">user_id</field>
+        <field name="name">Nhóm theo Người dùng</field>
+        <field name="model">tl.report.wizard</field>
+        <!-- <field name="type">update_phone_number</field> -->
+    </record>
+
+    <!-- omicall.wizard -->
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_1" model="dc.selection">
+        <field name="code">omi_create</field>
+        <field name="name">Tạo</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_2" model="dc.selection">
+        <field name="code">omi_edit</field>
+        <field name="name">sửa</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_3" model="dc.selection">
+        <field name="code">omi_delete</field>
+        <field name="name">omi_delete</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_4" model="dc.selection">
+        <field name="code">omi_get</field>
+        <field name="name">omi_get</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_5" model="dc.selection">
+        <field name="code">update_omiid</field>
+        <field name="name">update_omiid</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_res_partner_6" model="dc.selection">
+        <field name="code">omi_get_by_omiid</field>
+        <field name="name">omi_get_by_omiid</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">res.partner</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_api_wine_1" model="dc.selection">
+        <field name="code">get_call_transaction_list</field>
+        <field name="name">get_call_transaction_list</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    
+    <record id="dc_selection_omicall_wizard_for_api_wine_2" model="dc.selection">
+        <field name="code">create_call_history</field>
+        <field name="name">create_call_history</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_api_wine_3" model="dc.selection">
+        <field name="code">omi_get_webhook</field>
+        <field name="name">omi_get_webhook</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    
+    <record id="dc_selection_omicall_wizard_for_api_wine_4" model="dc.selection">
+        <field name="code">destroy_contact_webhook</field>
+        <field name="name">destroy_contact_webhook</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+
+    <record id="dc_selection_omicall_wizard_for_api_wine_5" model="dc.selection">
+        <field name="code">destroy_call_webhook</field>
+        <field name="name">destroy_call_webhook</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    
+    <record id="dc_selection_omicall_wizard_for_api_wine_6" model="dc.selection">
+        <field name="code">add_contact_webhook</field>
+        <field name="name">add_contact_webhook</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+
+
+    <record id="dc_selection_omicall_wizard_for_api_wine_7" model="dc.selection">
+        <field name="code">add_call_webhook</field>
+        <field name="name">add_call_webhook</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    
+    <record id="dc_selection_omicall_wizard_for_api_wine_8" model="dc.selection">
+        <field name="code">get_omicall_token</field>
+        <field name="name">get_omicall_token</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+
+
+    <record id="dc_selection_omicall_wizard_for_api_wine_9" model="dc.selection">
+        <field name="code">webhook_create_contact</field>
+        <field name="name">webhook_create_contact</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    <record id="dc_selection_omicall_wizard_for_api_wine_10" model="dc.selection">
+        <field name="code">omi_list</field>
+        <field name="name">omi_list</field>
+        <field name="model">omicall.wizard</field>
+        <field name="type">omicall.history</field> 
+    </record>
+    
+    
+
+    
+</odoo>

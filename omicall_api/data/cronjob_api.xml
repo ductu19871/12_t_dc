@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <record id="cronjob_get_token" model="ir.cron">
+            <field name="name">Get token everyday 4</field>
+            <field name="model_id" ref="model_omicall_history"/>
+            <field name="state">code</field>
+            <field name="code">model.get_omicall_token()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 00:00:01')" />
+            <field name="numbercall">-1</field>
+        </record>  
+
+        <!-- <record id="cronjob_get_data" model="ir.cron">
+            <field name="name">Get data everyday</field>
+            <field name="model_id" ref="model_omicall_history"/>
+            <field name="active" eval="True" />
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="code">model.get_data_everyday()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="(DateTime.now()).strftime('%Y-%m-%d 11:00:00')" />
+            <field name="numbercall">-1</field>
+        </record>     -->
+    </data>
+</odoo>

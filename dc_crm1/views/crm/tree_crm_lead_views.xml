@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_inherit_tree123_view" model="ir.ui.view">
+        <field name="name">crm.lead.tree.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+        <field name="arch" type="xml">
+            <field name="planned_revenue" position="before">
+                    <field name="product_uom_qty" />
+                    <field name="qty_done" />
+                    <field name="qty_remain" />
+            </field>
+            <field name="planned_revenue" position="after">
+                <field name="so_price_total" />
+                <field name="order_id" />
+                <!-- <field name="so_amount_total" sum="so_amount_total" /> -->
+            </field>
+            <field name="partner_id" position="after">
+                <field name="contact_name" />
+                <field name="phone" />
+                <field name="mobile" />
+                <field name="type"/>
+                <field name="type2"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

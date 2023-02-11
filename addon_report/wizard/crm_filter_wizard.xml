@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="crm_filter_wizard_form_view" model="ir.ui.view">
+           <field name="name">crm_filter_wizard_form_view</field>
+           <field name="model">crm.filter.wizard</field>
+           <field name="arch" type="xml">
+               <form string="">
+                   <sheet>
+                       
+                       <group>
+                           <group>
+                               <field name="product_ids" widget="many2many_tags"/>
+                               <field name="categ_ids" widget="many2many_tags"/>
+                           </group>
+                           <group>
+                           </group>
+                       </group>
+                   </sheet>
+                   <footer>
+                        <button name="button_open_report_list_view" type="object" string="Confirm" class="oe_highlight"/>
+                        <!-- <button name="download_xlsx" type="object" string="Export Excel" class="oe_highlight" /> -->
+                        <button special="cancel" string="Cancel" class="btn-secondary"/>
+                    </footer>
+               </form>
+           </field>
+       </record>
+
+        <record id="action_crm_filter_wizard" model="ir.actions.act_window">
+            <field name="name">Report Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="context">{}</field>
+            <field name="res_model">crm.filter.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+        
+    
+    
+      
+
+
+
+
+    </data>
+</odoo>

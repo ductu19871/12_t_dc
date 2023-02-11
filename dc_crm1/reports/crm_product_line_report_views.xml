@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_product_line_report_view_tree" model="ir.ui.view">
+        <field name="name">crm.product.line.report.view.tree</field>
+        <field name="model">crm.product.line.report</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="sum_product_uom_qty"/>
+                <field name="sum_qty_done"/>
+                <field name="rate"/>
+                <field name="product_id"/>
+                <field name="price_unit"/>
+                <field name="select_categ_id"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_crm_product_line_report" model="ir.actions.act_window">
+	    <field name="name">Báo cáo CRM</field>
+	    <field name="res_model">crm.product.line.report</field>
+	    <field name="view_mode">tree</field>
+        <field name="view_id" ref="crm_product_line_report_view_tree" />
+	</record>
+
+ 
+
+
+    <record id="action_server_open_tl_report_wizard" model="ir.actions.server">
+        <field name="name">CRM Report</field>
+        <field name="model_id" ref="dc_crm1.model_crm_product_line_report"/>
+        <field name="binding_model_id" ref="dc_crm1.model_crm_product_line_report"/>
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">action = env['tl.report.wizard'].with_context(default_report='crm_report').action_server_open_tl_report_wizard()</field>
+    </record>
+
+
+	<!-- <record id="action_server_open_tl_report_wizard" model="ir.actions.server">
+            <field name="name">crm.product.line.report</field>
+            <field name="model_id" ref="addon_report.model_tl_report_wizard"/>
+            <field name="binding_model_id" ref="purchase.model_crm.product.line.report"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">action = env['tl.report.wizard'].with_context(default_report='crm.product.line.report').action_server_open_tl_report_wizard()</field>
+        </record> -->
+
+	<!-- <menuitem
+		id="menu_action_crm_product_line_report"
+		name="crm.product.line.report"
+		parent="crm.crm_menu_report"
+		action="action_crm_product_line_report"
+		sequence="10"/> -->
+
+        <menuitem
+		id="menu_action_crm_product_line_report"
+		name="Báo cáo CRM"
+		parent="crm.crm_menu_report"
+		action="action_server_open_tl_report_wizard"
+		sequence="10"/>
+    
+
+        <record id="action_server_open_tl_report_wizard_crm_filter" model="ir.actions.server">
+            <field name="name">filter CRM</field>
+            <field name="model_id" ref="dc_crm1.model_crm_product_line_report"/>
+            <field name="binding_model_id" ref="dc_crm1.model_crm_product_line_report"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">action = env['crm.filter.wizard'].with_context(default_report='crm_filter').action_server_open_tl_report_wizard()</field>
+        </record>
+
+        <menuitem
+        id="menu_action_server_open_tl_report_wizard_crm_filter"
+        name="CRM filter"
+        parent="crm.crm_menu_report"
+        action="action_server_open_tl_report_wizard_crm_filter"
+        sequence="10"/>
+</odoo>

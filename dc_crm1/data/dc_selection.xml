@@ -1,0 +1,84 @@
+<odoo>
+    
+    <record id="dc_selection_tl_report_wizard_0" model="dc.selection">
+        <field name="code">select_categ_id</field>
+        <field name="name">Nhóm theo Nhóm Chọn Sản Phẩm</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+    <record id="dc_selection_tl_report_wizard_1" model="dc.selection">
+        <field name="code">product_id</field>
+        <field name="name">Nhóm theo Sản Phẩm</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+
+    <record id="dc_selection_tl_report_wizard_2" model="dc.selection">
+        <field name="code">partner_id</field>
+        <field name="name">Nhóm theo khách hàng</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+    
+    <record id="dc_selection_tl_report_wizard_3" model="dc.selection">
+        <field name="code">user_id</field>
+        <field name="name">Nhóm theo Người dùng</field>
+        <field name="model">tl.report.wizard</field>
+    </record>
+
+    <!-- xác suất-->
+
+    <record id="dc_selection_probability_id_1" model="dc.selection">
+        <field name="code">10</field>
+        <field name="name">10%-Đủ điều kiện/Phát hiện tiềm năng</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">10</field>
+    </record>
+
+    <record id="dc_selection_probability_id_2" model="dc.selection">
+        <field name="code">30</field>
+        <field name="name">30%-Khám phá/Nhu cầu</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">30</field>
+    </record>
+
+    <record id="dc_selection_probability_id_3" model="dc.selection">
+        <field name="code">50</field>
+        <field name="name">50%-Phát triển giải pháp: Demo, thử mẫu</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">50</field>
+    </record>
+
+    <record id="dc_selection_probability_id_4" model="dc.selection">
+        <field name="code">70</field>
+        <field name="name">70%-Đề xuất</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">70</field>
+    </record>
+
+    <record id="dc_selection_probability_id_5" model="dc.selection">
+        <field name="code">90</field>
+        <field name="name">90%-Cam kết/đạt được thỏa thuận</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">90</field>
+    </record>
+
+    <record id="dc_selection_probability_id_7" model="dc.selection">
+        <field name="code">100</field>
+        <field name="name">100%-Thắng</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">100</field>
+    </record>
+    
+    <record id="dc_selection_probability_id_8" model="dc.selection">
+        <field name="code">0</field>
+        <field name="name">0%</field>
+        <field name="model">crm.lead</field>
+        <field name="type">probability_id</field>
+        <field name="value">0</field>
+    </record>
+
+</odoo>

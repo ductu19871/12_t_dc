@@ -1,0 +1,18 @@
+<odoo>
+    <record id="product_category_5" model="product.category">
+        <field name="parent_id" ref="product.product_category_1"/>
+        <field name="name">Office Furniture</field>
+    </record>
+    
+    <record id="product_product_25" model="product.product">
+        <field name="name">Acoustic Bloc Screens</field>
+        <field name="categ_id" ref="product_category_5"/>
+        <field name="standard_price">2870.0</field>
+        <field name="list_price">2950.0</field>
+        <field name="type">consu</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="default_code">FURN_6666</field>
+        <field name="image" type="base64" file="product/static/img/product_product_25-image.png"/>
+    </record>
+</odoo>

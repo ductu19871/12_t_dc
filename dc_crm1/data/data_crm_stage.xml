@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <data >
+            <record id="stage_1" model="crm.stage">
+                <field name="name">Chuẩn bị</field>
+                <field name="sequence">1</field>
+                <field name="active">True</field>
+            </record>
+            <record id="stage_2" model="crm.stage">
+                <field name="name">Tiếp cần khách hàng</field>
+                <field name="sequence">2</field>
+                <field name="active">True</field>
+            </record>
+            <record id="stage_3" model="crm.stage">
+                <field name="name">Báo giá để thuyết phục khách hàng</field>
+                <field name="sequence">3</field>
+                <field name="active">True</field>
+            </record>
+            <record id="stage_4" model="crm.stage">
+                <field name="name">Demo sản phẩm/thử mẫu</field>
+                <field name="sequence">4</field>
+                <field name="active">True</field>
+            </record>
+            <record id="stage_5" model="crm.stage">
+                <field name="name">Thống nhất và chốt đơn hàng/ hợp đồng bán</field>
+                <field name="sequence">5</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_6" model="crm.stage">
+                <field name="name">Thanh toán đợt 1</field>
+                <field name="sequence">6</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_7" model="crm.stage">
+                <field name="name">Giao hàng/ Chuyển giao</field>
+                <field name="sequence">7</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_8" model="crm.stage">
+                <field name="name">Thanh toán hoàn tất 100% giá trị hợp đồng</field>
+                <field name="sequence">8</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_9" model="crm.stage">
+                <field name="name">Chăm Sóc khách hàng sau bán hàng</field>
+                <field name="sequence">9</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_10" model="crm.stage">
+                <field name="name">Tiềm năng thất bại</field>
+                <field name="sequence">10</field>
+                <field name="active">True</field>
+            </record> 
+
+            <record id="stage_11" model="crm.stage">
+                <field name="name">Thành Công</field>
+                <field name="sequence">11</field>
+                <field name="active">True</field>
+            </record>
+        </data>
+</odoo>

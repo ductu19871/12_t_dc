@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <record id="create_partner_crm_wizard_form_view" model="ir.ui.view">
+            <field name="name">create.partner.crm.wizard.form</field>
+            <field name="model">create.partner.crm.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+
+                            <field name="phone_number" readonly="1" force_save="1" />
+                            <field name="is_invisible_phone_type"  invisible="1"/>
+                            <field name="phone_type" widget="radio"  attrs="{'invisible':[('is_invisible_phone_type','=',True)], 'required':[('is_invisible_phone_type','=',False)] }"/>
+                            <field name="look_partner_ids" widget="many2many_tags"/>
+                            <field name="call_id" readonly="1" force_save="1" invisible="1"/>
+                            <field name="create_contact_type_id" widget="radio" domain="[('id','in',dc_selection_ids)]"/>
+                            <field name="contact_name" attrs="{'invisible':[('is_has_partner','=',True)] }" />
+                            <field name="updated_partner_id" attrs="{'invisible':[('is_has_partner','=',True)] }"/>
+                            <!-- <field name="partner_ids" attrs="{'invisible':[('len_look_partner','&lt;',2)]}"/> -->
+                            <!-- <field name="select_partner_id"  attrs="{'required':[('len_look_partner','&gt;',0)], 'invisible':[('len_look_partner','&lt;',2)]}" widget="radio"/> -->
+                            <field name="select_partner_id"  attrs="{'required':[('len_look_partner','&gt;',0)], 'invisible':[('len_look_partner','&lt;',2)]}" widget="radio"/>
+                            <button string="Đi tới cửa sổ khách hàng" name="open_partner" type="object" class="oe_highlight" 
+                                attrs="{'invisible':[('select_partner_id','=',False)]}"/>   
+                            <field name="crm_id" context="{'form_view_ref':'crm.crm_case_form_view_oppor'}"
+                                attrs="{'invisible':[('crm_id','=',False)]}"/>
+                            <field name="lead_id" context="{'form_view_ref':'crm.crm_case_form_view_lead'}"
+                                attrs="{'invisible':[('lead_id','=',False)]}"/>
+                            <button string="Đi tới cửa sổ cơ hội" name="open_crm" type="object" class="oe_highlight"   attrs="{'invisible':[('crm_id','=',False)]}"
+                                /> 
+                            <button string="Đi tới cửa sổ tiềm năng" name="open_lead" type="object" class="oe_highlight"   attrs="{'invisible':[('lead_id','=',False)]}"
+                                />  
+                            <!-- <button string="Đi tới cửa sổ cơ hội" name="open_crm" type="object" class="oe_highlight" 
+                                attrs="{'invisible':[('crm_id','=',False)]}"/>                            -->
+                            <field name="is_has_partner" invisible="1"/>
+                            <field name="len_look_partner" invisible="1"/>
+                            <field name="dc_selection_ids" invisible="1">
+                                <tree>
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="is_show_create_contact_button" invisible="1" />
+                            <field name="is_show_update_contact_button" invisible="1" />
+                            <field name="is_show_create_crm_button" invisible="1" />
+                            <field name="is_show_create_lead_button" invisible="1" />
+                        </group>
+                    </group>
+                    <!-- <notebook>
+                        <page name="name" string="string">
+                            <field name="message" />
+                        </page>
+                    </notebook> -->
+                    <footer>
+                        <!-- <button string="create crm" 
+                            attrs="{'invisible':[('is_has_partner','=',False)]}"
+                            name="create_crm" type="object" class="oe_highlight"/> -->
+                        <!-- <button string="create crm" 
+                            name="create_crm" type="object" class="oe_highlight"/> -->
+                            
+                        <!-- <button string="create partner" 
+                            name="create_partner" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('is_has_partner','=',True)]}"
+                            /> -->
+                        
+                            <button string="Tạo Khách hàng" 
+                                name="action_confirm" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|', ('crm_id','!=',False), ('is_show_create_contact_button','=',False)]}" />
+                            <button string="Cập nhật khách hàng" 
+                                name="action_confirm" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|', ('crm_id','!=',False), ('is_show_update_contact_button','=',False)]}" />
+                            <button string="Tạo cơ hội" 
+                                name="action_confirm" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|', ('crm_id','!=',False), ('is_show_create_crm_button','=',False)]}" />
+                            <button string="Tạo Tiềm năng" 
+                                name="action_confirm" type="object" class="oe_highlight"
+                                attrs="{'invisible':['|', ('lead_id','!=',False), '|', ('crm_id','!=',False), ('is_show_create_lead_button','=',False)]}" />
+                            <button string="Refresh" 
+                                name="refresh" type="object" class="oe_highlight"
+                                 />
+                            
+                            <button string="Hủy" class="btn btn-default" special="cancel"/>
+
+
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- <act_window id="partner_wizard_action"
+            name="Grant Portal Access"
+            src_model="res.partner"
+            res_model="portal.wizard"
+            view_type="form" view_mode="form"
+            key2="client_action_multi" target="new"
+            groups="base.group_partner_manager"/> -->
+
+
+    
+
+        <record id="create_partner_crm_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tạo Liên Hệ hoặc Cơ Hội</field>
+            <field name="res_model">create.partner.crm.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+<!--     
+        <act_window
+                id="action_create_partner_crm_wizard_key2"
+                name="Tạo Liên Hệ hoặc Cơ Hội"
+                src_model="omicall.history"
+                res_model="create.partner.crm.wizard"
+                view_type="form" 
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+            
+                /> -->
+
+                <act_window
+                id="action_create_partner_crm_wizard_key2_2"
+                name="Tạo Liên Hệ hoặc Cơ Hội"
+                src_model="omicall.history"
+                res_model="create.partner.crm.wizard"
+                view_type="form" 
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+            
+                />
+    </data>   
+    
+</odoo>

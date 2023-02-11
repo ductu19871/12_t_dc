@@ -1,0 +1,16 @@
+<odoo>
+    <record id="omicall_history_refresher" model="base.automation">
+        <field name="name">omicall_history refresher</field>
+        <field name="model_id" ref="omicall_api.model_omicall_history" />
+        <field name="trigger">on_create_or_write</field>
+        <field name="active" eval="True" />
+        <field name="state">refresh</field>
+         
+        <!-- <field
+            name="filter_domain"
+        >[('statement_id.journal_id.debt', '=', True)]</field>
+        <field name="active" eval="True" />
+        <field name="state">code</field>
+        <field name="code">action = env['pos.config'].notify_debt_updates()</field> -->
+    </record>
+</odoo>

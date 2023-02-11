@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_omicall_history,access_omicall_history,model_omicall_history,,1,1,1,1
+access_omicall_wizard,access_omicall_wizard,model_omicall_wizard,base.group_system,1,1,1,1
+access_create_partner_crm_wizard,access_create_partner_crm_wizard,model_create_partner_crm_wizard,,1,1,1,1

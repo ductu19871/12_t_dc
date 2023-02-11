@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_case_opportunities_filter" model="ir.ui.view">
+        <field name="name">crm.lead.search.opportunity</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
+        <field name="arch" type="xml">
+
+
+            <field name="name" position="after">
+                <field name="order_line" string="Sản phẩm"
+                    filter_domain="['|',('order_line.product_id','ilike',self),('product_id','ilike',self)]" />
+                <field name="order_line" string="Nhóm"
+                    filter_domain="['|', ('order_line.categ_id','ilike',self), ('categ_id','ilike',self)]" />
+                <filter string="DK Đóng tháng tới" name="next_month"
+                    domain="[('date_deadline', '&gt;', (context_today() + relativedelta(months=1)).strftime('%Y-%m-01'))]" />
+                <separator/>
+                <filter string="Cha &amp; lẻ" name="next_month"
+                    domain="[('type2', 'in', ('parent','independ'))]" />
+                <separator/>
+
+                <filter string="Con &amp; lẻ" name="next_month"
+                    domain="[('type2', 'in', ('child','independ'))]" />
+
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

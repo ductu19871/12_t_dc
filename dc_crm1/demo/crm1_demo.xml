@@ -1,0 +1,75 @@
+<odoo>
+
+<!--     
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+    </record> -->
+   
+    <record id="crm_partner_01" model="res.partner">
+        <field name="name">CRM1</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="customer" eval="False"/>
+        <field name="email">crm1@mail.com</field>
+    </record>
+
+    <record id="crm_user_01" model="res.users">
+        <field name="partner_id" ref="crm_partner_01"/>
+        <field name="login">crm1</field>
+        <field name="password">1</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(4,ref('base.group_system')), (4, ref('sales_team.group_sale_manager'))]"/>
+        <!-- <field name="pos_security_pin">11</field> -->
+        <field name="lang">vi_VN</field>
+    </record>
+
+
+    <record id="crm_partner_02" model="res.partner">
+        <field name="name">CRM2</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="customer" eval="False"/>
+        <field name="email">crm2@mail.com</field>
+    </record>
+
+    <record id="crm_user_02" model="res.users">
+        <field name="partner_id" ref="crm_partner_02"/>
+        <field name="login">crm2</field>
+        <field name="password">1</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+        <!-- <field name="pos_security_pin">11</field> -->
+        <field name="lang">vi_VN</field>
+    </record>
+
+
+    <record id="crm_partner_03" model="res.partner">
+        <field name="name">KH CRM1</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="customer" eval="True"/>
+        <field name="email">kh_crm1@mail.com</field>
+        <field name="phone">0988888000</field>
+    </record>
+
+    <record id="crm_case_23" model="crm.lead">
+        <field name="create_date" eval="datetime.now() - timedelta(days=7)"/>
+        <field name="type">opportunity</field>
+        <field name="name">Access to Online Catalog</field>
+        <field name="planned_revenue">15</field>
+        <field name="probability">80.0</field>
+        <!-- <field name="team_id" ref="sales_team.crm_team_1"/> -->
+        <field name="user_id" ref="crm_user_01"/>
+        <field name="partner_id" ref="crm_partner_03"/>
+
+    </record>
+
+   
+
+    <record id="sale_order_line_1" model="crm.product.line">
+        <field name="order_id" ref="crm_case_23"/>
+        <field name="name">Acoustic Bloc Panel</field>
+        <field name="product_id" ref="product_product_25"/>
+        <field name="product_uom_qty">3</field>
+        <field name="product_uom" ref="uom.product_uom_unit"/>
+        <field name="price_unit">2950.00</field>
+    </record>
+
+</odoo>

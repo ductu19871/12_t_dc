@@ -1,0 +1,47 @@
+<odoo>
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                        <page name="name" string="OMI API">
+                            <group>
+                                <field name="sale_summary" />
+                                <field name="omiid" />
+                            </group>
+                            <field name="omi_log_ids" >
+                                <tree>
+                                    <field name="name" />
+                                    <field name="api_ret" />
+                                    <field name="status_code" />
+                                    <field name="send_payload" />
+                                    <!-- <field name="msg" /> -->
+                                    <field name="mobile_vals" />
+                                    <field name="isdisjoint" />
+                                    <field name="omiid" />
+                                    <field name="create_date" />
+                                    <field name="create_uid" />
+                                </tree>
+                            </field>
+                        </page>
+                </xpath>
+        </field>
+    </record>
+    <record id="partner_form_action" model="ir.actions.act_window">
+        <field name="name">LH</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">form</field>
+        <!-- <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            
+        </field> -->
+        <field name="view_id" ref="base.view_partner_form" />
+    </record>
+
+    <!-- <record id="partner_security.action_partner_customer" model="ir.actions.act_window">
+        <field name="context">{'default_customer': 1, 'default_supplier': 0, 'is_send_omi':1}</field>
+    </record> -->
+
+</odoo>
