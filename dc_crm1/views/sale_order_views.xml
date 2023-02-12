@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="sale_crm.sale_action_quotations" model="ir.actions.act_window">
+        <!-- <field name="name">Quotations</field> -->
+        <!-- <field name="res_model">sale.order</field> -->
+        <!-- <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/> -->
+        <field name="domain">['|',('opportunity_id', '=', active_id), ('order_line.crm_product_line_id','=',active_id)]</field>
+        <!-- <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field> -->
+    </record>
+
+    <record id="sale_crm.sale_action_orders" model="ir.actions.act_window">
+        <!-- <field name="name">Sale orders</field> -->
+        <!-- <field name="res_model">sale.order</field> -->
+        <field name="domain">['|', ('order_line.crm_product_line_id','=',active_id), ('opportunity_id', '=', active_id), ('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+        <!-- <field name="context">{'search_default_opportunity_id': [active_id], 'default_opportunity_id': active_id}</field> -->
+    </record>
+
+    
+
+</odoo>

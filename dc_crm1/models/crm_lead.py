@@ -53,20 +53,6 @@ class CL(models.Model):
     
 
     b1 = fields.Integer()
-    
-    # def write(self, vals):
-    #     rs =  super(CL, self).write(vals)
-    #     if 'stage_id' in vals:
-    #         for r in self:
-    #             if r.type2 =='parent':
-    #                 raise UserError('không được thiết lập stage khi là cha')
-    #     return rs
-    
-    # @api.constrains('stage_id')
-    # def aldskf(self):
-    #     for r in self:
-    #         if r.stage_id and r.type2=='parent':
-    #             raise UserError('dsfdfd')
     note = fields.Char(string='Ghi chú')
     sol_ids = fields.One2many('sale.order.line', 'crm_product_line_id')
     type2 = fields.Selection([('child','Con'), ('parent','Cha'), ('independ', 'Lẻ')], string='Loại quan hệ', compute='_compute_type2', store=True)
@@ -112,7 +98,55 @@ class CL(models.Model):
     order_line_ids = fields.One2many('sale.order.line', 'crm_product_line_id' )
     qty_done = fields.Float(compute='_compute_qty_done', string='Số lượng đã tạo đơn hàng', store=True, 
         digits=dp.get_precision('Product Unit of Measure'))
+    quotation_qty_done = fields.Float(compute='_compute_qty_done', sttion_remainring='Số lượng báo giá đã tạo', store=True, 
+        digits=dp.get_precision('Product Unit of Measure')) 
+    
+    @api.depends('order_line.qty_done','order_line_ids.state','order_line_ids.product_uom_qty','order_line_ids.product_uom','product_uom')
+    def _compute_qty_done(self):
+        for r in self:
+            if not r.order_line:
+                sale_order_line_ids = r.order_line_ids.filtered(lambda i: i.state in ('sale','done'))
+                quotation_order_line_ids = r.order_line_ids - sale_order_line_ids
+                qty_done = 0.0
+                quotation_qty_done = 0.0
+                for l in sale_order_line_ids:
+                    qty = l.product_uom._compute_quantity(l.product_uom_qty, r.product_uom)
+                    qty_done +=qty
+                for l in quotation_order_line_ids:
+                    qty = l.product_uom._compute_quantity(l.product_uom_qty, r.product_uom)
+                    quotation_qty_done +=qty
+
+                r.qty_done = qty_done
+                r.quotation_qty_done = quotation_qty_done
+            else:
+                r.qty_done = sum(r.order_line.mapped('qty_done'))
+                r.quotation_qty_done = sum(r.order_line.mapped('quotation_qty_done'))
+
+
+    # @api.depends('order_line.quotation_qty_done','order_line_ids.state','order_line_ids.product_uom_qty','order_line_ids.product_uom','product_uom')
+    # def _compute_qty_done(self):
+    #     for r in self:
+    #         if not r.order_line:
+    #             order_line_ids = r.order_line_ids.filtered(lambda i: i.state in ('sale','done'))
+    #             qty_done = 0.0
+    #             for l in order_line_ids:
+    #                 qty = l.product_uom._compute_quantity(l.product_uom_qty, r.product_uom)
+    #                 qty_done +=qty
+    #             r.qty_done = qty_done
+    #         else:
+    #             r.qty_done = sum(r.order_line.mapped('qty_done'))
+    
     qty_remain = fields.Float(compute='_compute_qty_remain', store=True, digits=dp.get_precision('Product Unit of Measure'), string='Số lượng còn lại')
+    quotation_qty_remain = fields.Float(compute='_compute_qty_remain', 
+        store=True, digits=dp.get_precision('Product Unit of Measure'), string='Số lượng báo giá còn lại')
+    
+    @api.depends( 'product_uom_qty','qty_done','quotation_qty_done')
+    def _compute_qty_remain(self):
+        for r in self:
+            r.qty_remain = r.product_uom_qty - r.qty_done
+            r.quotation_qty_remain = r.product_uom_qty - r.qty_done - r.quotation_qty_done
+    
+
     currency_id = fields.Many2one(related="company_id.currency_id", string="Currency", readonly=True, store=True, compute_sudo=True)
     so_price_total = fields.Float(compute='_compute_so_price_total', store=True, string='Doanh thu')
     so_price_unit = fields.Float(compute='_compute_so_price_total', store=True,  string='Đơn giá ở đơn hàng')
@@ -129,23 +163,9 @@ class CL(models.Model):
             else:
                 r.so_price_total  = sum(r.order_line.mapped('so_price_total'))
     #  def _compute_quantity(self, qty, to_unit, round=True, rounding_method='UP', raise_if_failure=True):
-    @api.depends('order_line.qty_done','order_line_ids.state','order_line_ids.product_uom_qty','order_line_ids.product_uom','product_uom')
-    def _compute_qty_done(self):
-        for r in self:
-            if not r.order_line:
-                order_line_ids = r.order_line_ids.filtered(lambda i: i.state in ('sale','done'))
-                qty_done = 0.0
-                for l in order_line_ids:
-                    qty = l.product_uom._compute_quantity(l.product_uom_qty, r.product_uom)
-                    qty_done +=qty
-                r.qty_done = qty_done
-            else:
-                r.qty_done = sum(r.order_line.mapped('qty_done'))
+   
 
-    @api.depends( 'product_uom_qty','qty_done')
-    def _compute_qty_remain(self):
-        for r in self:
-            r.qty_remain = r.product_uom_qty - r.qty_done
+    
     is_win = fields.Boolean(compute='_compute_win_state', store=True)
     select_categ_id  = fields.Many2one('product.category', string='Chọn Nhóm SP')
     
@@ -322,41 +342,50 @@ class CL(models.Model):
                 name = r.product_id.display_name or r.select_categ_id.display_name or r.note
                 r.name = name
 
-    def create_default_create_so_wizard(self):
+    def _create_default_create_so_wizard(self, fname='qty_remain'):
         line_ids = []
-        if self.order_line:
-            order_line = self.order_line
-            order_id = self
-        else:
-            order_line = self
-            if self.order_id:
-                order_id = self.order_id
-            else:
-                order_id = self
-        for line in order_line:
-            if not line.qty_remain:
-                continue
-            line_va = line.copy_data()[0]
-            line_va['crm_product_line_id']= line.id
-            line_va['order_id']=order_id.id#self.id
-            line_va['product_uom_qty']= line.qty_remain if line.qty_remain > 0 else 0
-            print ('line_va', line_va)
-            line_ids.append((0,0,line_va))
+        # IS_CHOOSE_QUOTATION = True
+        # if not IS_CHOOSE_QUOTATION:
+        #     fname = 'qty_remain'
+        # else:
+        #     fname = 'quotation_qty_remain'
 
+        # if self.order_line:
+        #     order_line = self.order_line
+        #     order_id = self
+        # else:
+        #     order_line = self
+        #     if self.order_id:
+        #         order_id = self.order_id
+        #     else:
+        #         order_id = self
+        order_line = self.order_line or self
+        order_id = self.order_id or self
+        for line in order_line:
+            qty_remain = line[fname]
+            if not line[fname]:
+                continue
+            line_val = line.copy_data()[0]
+            line_val['crm_product_line_id']= line.id
+            line_val['order_id'] = order_id.id
+            line_val['product_uom_qty'] = qty_remain if qty_remain > 0 else 0
+            line_ids.append((0, 0, line_val))
         res = {
             'crm_id': self.id,
             'line_ids':line_ids,
-            # 'line_ids':[(0,0,{'order_id':self.id, 'crm_product_line_id': i.id}) for i in self.order_line]
-        #    'phone_number': active_id.destination_number,
-        #    'partner_ids':active_id.partner_ids.ids
         }
         rs = self.env['create.so.wizard'].create(res)
-        # rs.line_ids._onchange_crm_product_line_id()
         return rs.id
     
     def create_sale_wizard(self):
-        action = self.env.ref('dc_crm1.create_so_wizard_action').sudo().read()[0]
-        action['res_id'] = self.create_default_create_so_wizard()
+        order_line = self.order_line or self
+        is_popup_select_quotation_qty = any(x.quotation_qty_remain>0 and x.quotation_qty_remain != x.qty_remain for x in order_line)
+        # action = self.env.ref('dc_crm1.create_so_wizard_action').sudo().read()[0]
+        if is_popup_select_quotation_qty:
+            action = self.env.ref('dc_crm1.pre_create_so_wizard_action').sudo().read()[0]
+        else:
+            action = self.env.ref('dc_crm1.create_so_wizard_action').sudo().read()[0]
+            action['res_id'] = self._create_default_create_so_wizard()
         return action
     
     # @api.depends('order_line.price_total','price_total')

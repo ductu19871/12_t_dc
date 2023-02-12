@@ -20,6 +20,7 @@ class CreadSOLineWizard(models.TransientModel):
     crm_product_line_id = fields.Many2one('crm.lead', string='Dòng cơ hội gốc', ondelete='cascade', required=True)
     qty_done = fields.Float(related='crm_product_line_id.qty_done', store=True)
     qty_remain = fields.Float(related='crm_product_line_id.qty_remain', store=True)
+    quotation_qty_remain = fields.Float(related='crm_product_line_id.quotation_qty_remain', store=True)
     select_categ_id  = fields.Many2one(related='crm_product_line_id.select_categ_id', store=True, string='Chọn Nhóm SP')
     # categ_id = fields.Many2one('product.category', string='Nhóm SP')
     # categ_id = fields.Many2one(related='crm_product_line_id.categ_id', store=True, string='Nhóm SP')
