@@ -4,6 +4,37 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <!-- <field name="email"  position="after">
+                    <field name="facebook" />
+                </field> -->
+               
+                <!-- <field name="function"  position="before">
+                    <field name="birthdate" />
+                </field> -->
+                <xpath expr="//field[@name='child_ids']/form//group/group" position="attributes">
+                    <attribute name="attrs"></attribute>
+                </xpath>
+
+                <field name="vat"  position="after">
+                    <field name="is_control" />
+                    <field name="hobby" />
+                </field>
+
+
+                <field name="user_ids"  position="before">
+                    <field name="mobile2" />
+                    <field name="mobile3" />
+                </field>
+                <field name="website"  position="before">
+                    <field name="facebook" />
+                    <field name="Linkedin" />
+                </field>
+
+                <!-- <field name="website"  position="after">
+                    <field name="is_control" />
+                    <field name="hobby" />
+                    
+                </field> -->
                 <xpath expr="//field[@name='child_ids']/form//field[@name='email']" position="after">
                         <field name="ward_id" />
                 </xpath>

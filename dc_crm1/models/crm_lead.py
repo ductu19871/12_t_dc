@@ -20,10 +20,28 @@ class CL(models.Model):
     # _sql_constraints = [
     #     ('crm_line_uniq', 'unique (order_id, product_id, select_categ_id)', 'order_id, product_id,select_categ_id must be unique !')]
 
+    
+
+
     product_uom_qty = fields.Float(string='Ordered Quantity', 
         digits=dp.get_precision('Product Unit of Measure'), store=True, required=True, default=1.0, compute='_compute_product_uom_qty',readonly=False)
     partner_parent_id = fields.Many2one('res.partner')
-    is_create_partner_parent_id = fields.Boolean()
+    is_create_partner_parent_id = fields.Boolean(default=True)
+
+    def action_sale_action_quotations(self):
+        action = self.env.ref('sale_crm.sale_action_quotations').sudo().read()[0]
+        # action['res_id'] = self.id
+        action['target'] = 'new'
+        # action['views'] = [(False,'form')]
+        return action
+
+
+    def open_form_in_tree(self):
+        action = self.env.ref('crm.crm_lead_opportunities_tree_view').sudo().read()[0]
+        action['res_id'] = self.id
+        action['target'] = 'new'
+        action['views'] = [(False,'form')]
+        return action
 
     @api.onchange('partner_name')
     def _onchange_to_partner_parent_id(self):
@@ -39,7 +57,8 @@ class CL(models.Model):
             else:
                 r.product_uom_qty = 1.0
 
-    a1 = fields.Integer(compute='_compute_a1', store=True, readonly=False)
+    # a1 = fields.Integer(compute='_compute_a1', store=True, readonly=False)
+    a1 = fields.Integer(compute='_compute_a1', store=True)
     
     @api.depends('b1')
     def _compute_a1(self):
@@ -149,7 +168,7 @@ class CL(models.Model):
 
     currency_id = fields.Many2one(related="company_id.currency_id", string="Currency", readonly=True, store=True, compute_sudo=True)
     so_price_total = fields.Float(compute='_compute_so_price_total', store=True, string='Doanh thu')
-    so_price_unit = fields.Float(compute='_compute_so_price_total', store=True,  string='Đơn giá ở đơn hàng')
+    so_price_unit = fields.Float(compute='_compute_so_price_total', store=True,  string='Đơn giá trung bình ở đơn hàng')
     select_categ_id  = fields.Many2one('product.category', string='Chọn Nhóm SP')
     # partner_id = fields.Many2one('res.partner', related='order_id.partner_id')
 
@@ -227,16 +246,66 @@ class CL(models.Model):
     
     # qty_done = fields.Integer(compute='_compute_sum_qty_done', string='Số lượng thực tế')
     # product_uom_qty = fields.Integer(compute='_compute_sum_product_uom_qty', string='Số lượng dự kiến')
-    partner_id = fields.Many2one('res.partner', compute='_compute_partner_id', store=True, readonly=False)
+    partner_id = fields.Many2one('res.partner', compute='_compute_partner_id', store=True, readonly=False, string='Liên hệ')
+    real_partner_id = fields.Many2one('res.partner', compute='_compute_real_partner_id', store=True)
+    
+    @api.depends('partner_id')
+    def _compute_real_partner_id(self):
+        for r in self:
+            r.real_partner_id = r.partner_id.parent_id.company_type =='company' and r.partner_id.parent_id or r.partner_id
     contact_name = fields.Char(compute='_compute_partner_id', store=True, readonly=False)
     phone = fields.Char(compute='_compute_partner_id', store=True, readonly=False)
     mobile = fields.Char(compute='_compute_partner_id', store=True, readonly=False)
+
+    def _default_country_id(self):
+        country_id = self.env['res.country'].search([('name', 'ilike', 'Việt Nam')], limit=1)
+        return country_id.id if country_id else False
+
+    country_id = fields.Many2one('res.country', default=_default_country_id, string='Country', ondelete='restrict', compute='_compute_partner_id', store=True, readonly=False )
+    ward_id = fields.Many2one('res.country.ward', string=_('Ward'), compute='_compute_partner_id', store=True, readonly=False)
+    district_id = fields.Many2one('res.country.district', string=_('District'), compute='_compute_partner_id', store=True, readonly=False)
+    house = fields.Char(string=_('House'), compute='_compute_partner_id', store=True, readonly=False)
+    door = fields.Char(string=_('Door'), compute='_compute_partner_id', store=True, readonly=False)
+    # address2 = fields.Char(string=_('Address'), compute='_compute_address2', store=True, compute='_compute_partner_id', store=True, readonly=False)
+
+
+
     @api.depends('order_id.partner_id')
     def _compute_partner_id(self):
         for r in self:
             if r.order_id:
                 r.partner_id = r.order_id.partner_id
                 r._onchange_partner_id()
+
+
+    # def _onchange_partner_id_values(self, partner_id):
+    #     """ returns the new values when partner_id has changed """
+    #     if partner_id:
+    #         partner = self.env['res.partner'].browse(partner_id)
+
+    #         partner_name = partner.parent_id.name
+    #         if not partner_name and partner.is_company:
+    #             partner_name = partner.name
+
+    #         return {
+    #             'parttner_name': partner_name,
+    #             'conact_name': partner.name if not partner.is_company else False,
+    #             'title': partner.title.id,
+    #             'street': partner.street,
+    #             'street2': partner.street2,
+    #             'city': partner.city,
+    #             'state_id': partner.state_id.id,
+    #             'country_id': partner.country_id.id,
+    #             'email_from': partner.email,
+    #             'phone': partner.phone,
+    #             'mobile': partner.mobile,
+    #             'zip': partner.zip,
+    #             'function': partner.function,
+    #             'website': partner.website,
+    #         }
+    #     return {}
+
+
 
     @api.depends('so_price_total','price_total')
     def _compute_value_rate(self):

@@ -6,7 +6,7 @@
     'category': 'Other',
     'description': """CRM 1 DC""",
     'author': 'D4',
-    "depends": ['base','crm','sale_crm','omicall_api','sale','addon_report'],
+    "depends": ['base','crm','sale_crm','omicall_api','sale','addon_report','crm_lozication'],
     'data': [
              'security/ir.model.access.csv',
             #  'demo/product_demo.xml',

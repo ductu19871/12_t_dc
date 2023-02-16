@@ -125,6 +125,7 @@ class ApiWine(models.Model):
             return rs
     
     def omi_api_common(self, url, vals={}, method='post'):
+        IS_RAISE = self._context.get('is_authen_omi_raise')
         # url = 'https://public-v1-stg.omicall.com/api/contacts/update'
         print ('url',url )
         company_id = self.env['res.company'].browse(1)
@@ -141,8 +142,12 @@ class ApiWine(models.Model):
             response = json.loads(list_request.content)
         except:
             response = list_request.content.decode('utf-8')
+        
         if not isinstance(response, dict):
-            raise UserError('lỗi authen :%s'%response)
+            if IS_RAISE :
+                raise UserError('lỗi authen :%s'%response)
+            else:
+                return {'ret':'lỗi authen :%s'%response}
         return response
 
     def re_phone(self, val):
@@ -243,10 +248,11 @@ class ApiWine(models.Model):
         url = create_url or 'https://public-v1-stg.omicall.com/api/contacts/update'
         vals['url'] = url
         api_ret = self.omi_api_common(url, vals, 'post')
-        if is_update_token:
-            rs2 = self.update_omiid_no_log(partner)
-            rs2['func_name'] = 'update_omiid'
-        return {'ret':api_ret, 'ret2':rs2, 'send_payload':vals,  'mobile_vals':vals['phones'], 'isdisjoint': isdisjoint}
+        ret2 = None
+        if is_update_token and api_ret.get('status_code')=='9999':
+            ret2 = self.update_omiid_no_log(partner)
+            ret2['func_name'] = 'update_omiid'
+        return {'ret':api_ret, 'ret2':ret2, 'send_payload':vals,  'mobile_vals':vals['phones'], 'isdisjoint': isdisjoint}
 
     def omi_list(self):
         vals = {'page':1, 'size':500}#, 'keyword':'78'

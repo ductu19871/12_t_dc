@@ -111,7 +111,8 @@ class CreadSOWizard(models.TransientModel):
             opportunity_id = self.crm_id.order_id
         else:
             opportunity_id = self.crm_id
-        sale_vals['partner_id'] = self.crm_id.partner_id.id
+        # sale_vals['partner_id'] = self.crm_id.partner_id.id
+        sale_vals['partner_id'] = self.crm_id.real_partner_id.id
         sale_vals['opportunity_id'] = opportunity_id.id
         sale_vals['user_id'] = self.crm_id.user_id.id
         sale_vals['order_line'] = order_line_vals

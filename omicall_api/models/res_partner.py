@@ -18,7 +18,7 @@ class ResPartner(models.Model):
     omiid = fields.Char(string='omi id', track_visibility='onchange')
     omi_log_ids  = fields.One2many('omi.log','res_id', domain=[('model','=','res.partner')], context={'default_model': 'res.partner'})
     type = fields.Selection(selection_add=[('phone','SĐT khác')] )
-    is_duplicate_ref = fields.Boolean(search='_search_is_duplicate_ref', store=False)
+    is_duplicate_phone = fields.Boolean(search='_search_is_duplicate_phone', store=False)
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
@@ -44,7 +44,7 @@ class ResPartner(models.Model):
                 r.sale_summary = False
 
 
-    def _search_is_duplicate_ref(self, operator, value):
+    def _search_is_duplicate_phone(self, operator, value):
         query = """
                         SELECT id
                         FROM   res_partner p
@@ -62,23 +62,8 @@ class ResPartner(models.Model):
             return [('id', 'not in', overlap_mapping)]
         else:
             return [('id', 'in', [])]
-    # is_must_set_omi = fields.Boolean(compute='_compute_is_must_set_omi', store=True)
+    
 
-    # @api.depends('child_ids.mobile,child_ids.mobile')
-    # def _compute_is_must_set_omi(self):
-    #     for r in self:
-    #         for c  in r.child_ids:
-    #             is_must_set_omi = False
-    #             if c.type =='phone':
-    #                 if c.mobile or c.phone:
-    #                     is_must_set_omi = True
-
-    # @api.constrains('phone','mobile')
-    # def constrains_phone(self):
-    #     for r in self:
-    #         pass
-
-    #child_ids: thằng con chỉ có tạo mới, sửa
     @api.model
     def create(self, vals):# trường hợp này có khi thằng con nó được tạo lúc ghi. thằng con được tạo mới thì nó được thằng cha lo rồi.
         partners = super(ResPartner, self.with_context(is_dc_creating_partner=True)).create(vals)
