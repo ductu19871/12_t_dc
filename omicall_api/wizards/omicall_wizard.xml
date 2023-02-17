@@ -62,6 +62,7 @@
             view_mode="form"
             target="new"
             key2="client_action_multi"
+            groups="base.group_system"
         />
         <act_window
             id="action_partner_omicall_wizard_2"

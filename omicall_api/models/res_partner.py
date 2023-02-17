@@ -12,6 +12,15 @@ class ResPartner(models.Model):
     _name = 'res.partner'
     _inherit = ['res.partner','mail.thread']
 
+    mobile_one = fields.Char(compute='_compute_mobile_one')
+
+    def _compute_mobile_one(self):
+        for r in self:
+            # r.mobile_one = r.mobile or r.mobile2 or r.mobile3 
+            r.mobile_one = '|'.join([i for i in (r.mobile,r.mobile2,r.mobile3) if i])
+
+    mobile2 = fields.Char('Di động 2')
+    mobile3 = fields.Char('Di động 3')
     dc_crm_ids = fields.One2many('crm.lead', 'partner_id', string='Crm')
     sale_summary = fields.Text(compute='_compute_sale_summary', store=True, track_visibility='onchange', readonly=False)
     phone = fields.Char(track_visibility='onchange', required=False)

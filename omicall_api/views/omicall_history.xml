@@ -118,6 +118,20 @@
             </field>
         </record>
 
+
+        <record id="omicall_history_form_admin" model="ir.ui.view">
+            <field name="name">omicall_history_form</field>
+            <field name="model">omicall.history</field>
+            <field name="inherit_id" ref="omicall_history_form" />
+            <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+            <field name="arch"  type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create" value="1"></attribute>
+                    <attribute name="edit">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
         <record id="omicall_history_act_window" model="ir.actions.act_window">
             <field name="name">Omicall History</field>
             <field name="type">ir.actions.act_window</field>

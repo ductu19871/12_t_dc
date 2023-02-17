@@ -382,34 +382,36 @@ class CL(models.Model):
     @api.depends('partner_id', 'phone', 'order_line','product_id','select_categ_id')
     def _compute_name(self):
         for r in self:
-            if r.order_line:
-                arr_res = []
-                phones = {}
-                if r.phone:
-                    phones['Phone'] = r.phone
-                if r.mobile:
-                    phones['mobile'] = r.mobile
-                str_phone_mobile = ','.join(['%s:%s'%(k,v) for k,v in phones.items()])
+            order_line = r.order_line or r
+            arr_res = []
+            phones = {}
+            
+            if r.phone:
+                phones['Phone'] = r.phone
+            if r.partner_id.mobile_one and r.mobile:
+                phones['Mobile'] = r.partner_id.mobile_one or r.mobile
+            str_phone_mobile = ','.join(['%s:%s'%(k,v) for k,v in phones.items()])
+            names = []
 
-                names = []
-                if r.partner_id.display_name:
-                    name = r.partner_id.display_name
-                elif str_phone_mobile:
-                    name = 'Tiềm năng'
-                else:
-                    name = 'No partner, phone'
-                order_line_infos = [i.product_id.name or (i.select_categ_id.name and '*%s'%i.select_categ_id.name)  or '' for i in r.order_line[0:4]]
-                order_line_infos = [i for i  in order_line_infos if i]
-                order_line_info = ','.join(order_line_infos) + ('...' if (r.order_line and len(r.order_line) or 0 ) > 4 else '')
-
-
-                total = formatLang(self.env, r.price_total, currency_obj=r.currency_id)
-                # name += '|' + order_line_info if order_line_info else ''
-                arr_res = [i for i in [name, str_phone_mobile, order_line_info, total] if i]
-                r.name = '|'.join(arr_res)
+            if r.partner_id.display_name:
+                name = r.partner_id.display_name
+            elif str_phone_mobile:
+                name = 'Tiềm năng'
             else:
-                name = r.product_id.display_name or r.select_categ_id.display_name or r.note
-                r.name = name
+                name = 'No partner, phone'
+            
+            order_line_infos = [i.product_id.name or (i.select_categ_id.name and '*%s'%i.select_categ_id.name)  or '' for i in order_line[0:4]]
+            order_line_infos = [i for i  in order_line_infos if i]
+            order_line_info = ','.join(order_line_infos) + ('...' if (order_line and len(order_line) or 0 ) > 4 else '')
+
+
+            total = formatLang(self.env, r.price_total, currency_obj=r.currency_id)
+            # name += '|' + order_line_info if order_line_info else ''
+            arr_res = [i for i in [name, str_phone_mobile, order_line_info, total] if i]
+            r.name = '| '.join(arr_res)
+            # else:
+            #     name = r.product_id.display_name or r.select_categ_id.display_name or r.note
+            #     r.name = name
 
     def _create_default_create_so_wizard(self, fname='qty_remain'):
         line_ids = []
