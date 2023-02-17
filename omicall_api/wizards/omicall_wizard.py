@@ -28,36 +28,10 @@ class OmicallWizard(models.TransientModel):
     def domain_type_id(self):
         if self._context.get('default_udpate_omiid'):
             type_id = self.env['dc.selection'].search([('code','=','update_omiid')]).id
-            # return type_id
             return "[('id','=', %s)]"%type_id
         else:
-            # active_model = self._context.get('active_model')
-            # domain=[('type','=', active_model)]
-            # rs = self.env['dc.selection'].search(domain)[0]
-            # return rs
-
             return "[('type','=', active_model)]"
     type_id = fields.Many2one('dc.selection', domain=domain_type_id, default = default_type_id)
-
-    # @api.onchange('active_model')
-    # def _onchange_active_model(self):
-    #     vals = []
-    #     vals['domain'] = {'type_id':[('type','=', self.active_model)]}
-    #     return vals
-    # type = fields.Selection([('omi_create','Tạo'),
-    #     ('omi_edit','Sửa'), 
-    #     ('omi_delete','Delete'), 
-    #     ('omi_get', 'omi_get'), ('update_omiid', 'update_omiid'),
-    #     ('omi_get_by_omiid', 'omi_get_by_omiid'), ('omi_list', 'omi_list') ,
-    #     ('get_call_transaction_list', 'get_call_transaction_list'), 
-    #     ('create_call_history', 'create_call_history'), 
-    #     ('omi_get_webhook','omi_get_webhook') ,
-    #     ('destroy_contact_webhook','destroy_contact_webhook'),
-    #     ('destroy_call_webhook', 'destroy_call_webhook'),
-    #     ('add_contact_webhook','add_contact_webhook'),
-    #     ('add_call_webhook','add_call_webhook'),
-    #     ('get_omicall_token', 'get_omicall_token'),
-    #     ('webhook_create_contact','webhook_create_contact')], default='update_omiid')
     from_date = fields.Date(default =lambda self: fields.Date.context_today(self) - timedelta(days=1))
     to_date = fields.Date(default=fields.Date.context_today)
     status_code = fields.Integer()

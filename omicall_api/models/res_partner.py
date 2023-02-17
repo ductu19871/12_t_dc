@@ -17,7 +17,7 @@ class ResPartner(models.Model):
     phone = fields.Char(track_visibility='onchange', required=False)
     omiid = fields.Char(string='omi id', track_visibility='onchange')
     omi_log_ids  = fields.One2many('omi.log','res_id', domain=[('model','=','res.partner')], context={'default_model': 'res.partner'})
-    type = fields.Selection(selection_add=[('phone','SĐT khác')] )
+    # type = fields.Selection(selection_add=[('phone','SĐT khác')] )
     is_duplicate_phone = fields.Boolean(search='_search_is_duplicate_phone', store=False)
 
     @api.model
@@ -79,9 +79,6 @@ class ResPartner(models.Model):
 
     def get_obj_by_fields(self, fnames):
         return [{fname:i[fname] for fname in fnames} for i in self]
-        # objs = []
-        # for i in self:
-        #     objs.append({fname:i[fname] for fname in fnames})
 
     def get_dict_by_fields(self, vals, fnames):
         return {fname:vals.get(fname, False) for fname in fnames }
@@ -90,7 +87,7 @@ class ResPartner(models.Model):
     def write(self, vals):# trường hợp này thằng con chỉ có write mà ko có create.
         OH = self.env['omicall.history']
         not_pass_context = False
-        z = set(vals).intersection({'name', 'phone','mobile'})
+        z = set(vals).intersection({'name', 'phone','mobile','mobile2','mobile3'})
         if z:#not set(vals).isdisjoint({'name', 'phone','mobile'}):
             if not self._context.get('is_dc_creating_partner'):
                 obj_dict_list = self.get_obj_by_fields(z)
@@ -105,73 +102,17 @@ class ResPartner(models.Model):
             write_rs = super(ResPartner, self).write(vals)
         return write_rs
 
-    @api.multi
-    def unlink(self):
-        unlink_phone = self.filtered(lambda i: i.type=='phone')
-        # parent_partners0 = self.mapped('parent_id')
-        parent_partners = unlink_phone.mapped('parent_id')
-        # for partner in self:
-        #     if partner.type =='phone':
-        #         print ('ahahaha')
-        rs = super(ResPartner, self).unlink() 
-        OH = self.env['omicall.history']
-        OH.omi_edits(parent_partners)
-        # for partner in self:
-        #     if partner.type =='phone':
-        #         print ('ahahaha')
-        # raise UserWarning('ahahS')
-        return rs
-
-    # @api.model
-    # def create(self, vals):
-        
-    #     is_send_omi = self._context.get('is_send_omi') or 1
-    #     is_send_omi = self.env['ir.config_parameter'].sudo().get_param('omicall_api.is_send_omi')
-    #     partners = super(ResPartner, self).create(vals)
-    #     if  is_send_omi:
-    #         for p in partners:
-    #             if p.type =='phone':
-    #                 self.env['omicall.history'].omi_create(p)
-    #         for p in (is_send_omi and partners or []):
-    #             self.env['omicall.history'].omi_create(p)
-    #     return partners
-
-
     # @api.multi
-    # def write(self, vals):
-    #     is_send_omi = self._context.get('is_send_omi') or 1
-    #     is_send_omi = self.env['ir.config_parameter'].sudo().get_param('omicall_api.is_send_omi')
-    #     if not set(vals).isdisjoint({'name', 'phone','mobile'}) and is_send_omi:
-    #         for p in self:
-    #             old_sdt_asets = [set([sdt for sdt in [p.phone, p.mobile] if sdt]) for p in self]
-
-    #     rs = super(ResPartner, self).write(vals)
-    #     if not set(vals).isdisjoint({'name', 'phone','mobile'}) and is_send_omi:
-    #         # will_new_omiid
-    #         #phone  = False
-    #         new_phone_mobile_set = set([i for i in [vals.get('phone'), vals.get('mobile')] if i])
-    #         for count, p in enumerate(self):
-    #             isdisjoint_phone_old_with_new = new_phone_mobile_set.isdisjoint(old_sdt_asets[count])# nếu ko giống với số điện thoại củ gì cả
-    #             self.env['omicall.history'].omi_edit(p, isdisjoint=isdisjoint_phone_old_with_new)
+    # def unlink(self):
+    #     unlink_phone = self.filtered(lambda i: i.type=='phone')
+    #     parent_partners = unlink_phone.mapped('parent_id')
+    #     rs = super(ResPartner, self).unlink() 
+    #     OH = self.env['omicall.history']
+    #     OH.omi_edits(parent_partners)
     #     return rs
-
-
-    
 
     @api.model
     def cronjob_send_summary_partner_every_day(self):
         print ('1111'*100)
     
-    
-    # def get_omicall_token(self):
-    #     company_id = self.env['res.company'].browse(1)
-    #     if company_id:
-    #         url = self.env.ref('wine_api.url_get_token').url + company_id.api_key
-    #         response = requests.get(url)
-    #         ls_json = response.json()
-    #         omi_token = ls_json['payload']['access_token']
-    #         print ('**omi_token**', omi_token)
-    #         company_id.omi_token = omi_token
-    #         return omi_token
-    
-    
+   

@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     mobile3 = fields.Char('Di động 3')
     facebook = fields.Char()
     Linkedin = fields.Char()
-    is_control = fields.Char('Quyền lực tập trung') 
+    is_control = fields.Boolean() 
     hobby = fields.Char('Sở thích')
     # birthdate = fields.Date()
     

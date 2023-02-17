@@ -169,6 +169,19 @@ class ApiWine(models.Model):
                         "type": "personal",
                         "valueType": "Cá nhân"
                     })
+            if partner.mobile2:
+                data_phone.append({
+                        "data": self.re_phone(partner.mobile2),
+                        "type": "personal",
+                        "valueType": "Cá nhân"
+                    })
+            if partner.mobile3:
+                data_phone.append({
+                        "data": self.re_phone(partner.mobile3),
+                        "type": "personal",
+                        "valueType": "Cá nhân"
+                    })
+                
             if partner.email:
                 data_mail.append({
                         "data": partner.email,
@@ -249,7 +262,7 @@ class ApiWine(models.Model):
         vals['url'] = url
         api_ret = self.omi_api_common(url, vals, 'post')
         ret2 = None
-        if is_update_token and api_ret.get('status_code')=='9999':
+        if is_update_token and api_ret.get('status_code')==9999:
             ret2 = self.update_omiid_no_log(partner)
             ret2['func_name'] = 'update_omiid'
         return {'ret':api_ret, 'ret2':ret2, 'send_payload':vals,  'mobile_vals':vals['phones'], 'isdisjoint': isdisjoint}
@@ -684,16 +697,6 @@ class ApiWine(models.Model):
                         elif number_dict['data_type'] in ('home','office'):
                             phone = number_dict['display_value']
         return name,mobile,phone, omiid
-
-
-
-
-
-
-
-
-
-
 
 
 

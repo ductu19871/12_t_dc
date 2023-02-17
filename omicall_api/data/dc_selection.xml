@@ -28,12 +28,29 @@
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
     </record>
+    
     <record id="dc_selection_3" model="dc.selection">
         <field name="code">update_mobile</field>
         <field name="name">Tạo di động (mobile)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
     </record>
+
+    <record id="dc_selection_3ext1" model="dc.selection">
+        <field name="code">update_mobile2</field>
+        <field name="name">Tạo di động (mobile2)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number2</field>
+    </record>
+
+
+    <record id="dc_selection_3ext2" model="dc.selection">
+        <field name="code">update_mobile3</field>
+        <field name="name">Tạo di động (mobile3)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number3</field>
+    </record>
+
 
     <record id="dc_selection_4" model="dc.selection">
         <field name="code">create_sub_phone</field>

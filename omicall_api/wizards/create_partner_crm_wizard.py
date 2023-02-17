@@ -11,7 +11,7 @@ class CreatePartnerCrmWizard(models.TransientModel):
     call_id = fields.Many2one('omicall.history')
     contact_name = fields.Char('Tên liên hệ')
     phone_number = fields.Char(string='SĐT', related='call_id.destination_number')
-    phone_type = fields.Selection([('phone','Phone'),('mobile','Mobile')], default='phone')
+    phone_type = fields.Selection([('phone','Phone'),('mobile','Mobile')], default='mobile')
     is_invisible_phone_type = fields.Boolean(compute='_compute_is_invisible_phone_type')
 
     @api.depends('create_contact_type_id')
@@ -48,12 +48,11 @@ class CreatePartnerCrmWizard(models.TransientModel):
     def _compute_is_show_create_contact_type_button(self):
         if self.create_contact_type_id.code in ('create_contact',):
             self.is_show_create_contact_button = True
-        elif self.create_contact_type_id.code in ('update_phone','update_mobile','create_sub_phone','create_sub_mobile'):
+        elif self.create_contact_type_id.code in ('update_phone','update_mobile','create_sub_phone','create_sub_mobile','update_mobile2','update_mobile3',):
             self.is_show_update_contact_button = True
         elif self.create_contact_type_id.code in ('create_crm',):
             self.is_show_create_crm_button = True
-        elif self.create_contact_type_id.code in ('create_lead',):
-            self.is_show_create_lead_button = True
+   
     
     @api.model
     def default_get(self, fields):
@@ -67,7 +66,7 @@ class CreatePartnerCrmWizard(models.TransientModel):
 
     def gen_dc_selection_vals(self):
         ids = []
-        if self.is_has_partner:
+        if self.select_partner_id:
             ids.append('create_crm')
         else:
             if self.contact_name:
@@ -78,11 +77,15 @@ class CreatePartnerCrmWizard(models.TransientModel):
                     ids.append('update_phone')
                 if not self.updated_partner_id.mobile:
                     ids.append('update_mobile')
-                ids.append('create_sub_phone')
-                ids.append('create_sub_mobile')
+                elif self.updated_partner_id.mobile and not self.updated_partner_id.mobile2:
+                    ids.append('update_mobile2')
+                elif self.updated_partner_id.mobile and self.updated_partner_id.mobile2 and  not self.updated_partner_id.mobile3:
+                    ids.append('update_mobile3')
+                # ids.append('create_sub_phone')
+                # ids.append('create_sub_mobile')
         return ids        
         
-    @api.depends('call_id', 'updated_partner_id', 'contact_name')
+    @api.depends('call_id','select_partner_id', 'updated_partner_id', 'contact_name')
     def _compute_dc_selection_ids(self):
         ids = self.gen_dc_selection_vals()
         self.dc_selection_ids = self.env['dc.selection'].search([('code','in',ids)])
@@ -156,6 +159,10 @@ class CreatePartnerCrmWizard(models.TransientModel):
                     partner.phone = self.phone_number
                 elif self.create_contact_type_id.code == 'update_mobile':
                     partner.mobile = self.phone_number
+                elif self.create_contact_type_id.code == 'update_mobile2':
+                    partner.mobile2 = self.phone_number
+                elif self.create_contact_type_id.code == 'update_mobile3':
+                    partner.mobile3 = self.phone_number
             # self.create_contact_type_id = self.env.ref('dc_crm1.dc_selection_0')
             self.create_contact_type_id = self.env['dc.selection'].search([('code','=','create_crm')])
             # self.select_partner_ids = partner
@@ -230,13 +237,12 @@ class CreatePartnerCrmWizard(models.TransientModel):
         url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         menu_id = self.env.ref('contacts.menu_contacts').sudo().id
         action= self.env.ref('omicall_api.partner_form_action').sudo().read()[0]
-        action['res_id'] = self.select_partner_id.id
-        action['view_id'] = self.env.ref('base.view_partner_form').id
-        action['view_mode'] = 'form'
-        action['target'] = 'inline'# là full screen mới
-        return action
+        # action['res_id'] = self.select_partner_id.id
+        # action['view_id'] = self.env.ref('base.view_partner_form').id
+        # action['view_mode'] = 'form'
+        # action['target'] = 'new'# là full screen mới
+        # return action
         action_id = action['id']
-        # http://localhost:8069
         return {
                 'type': 'ir.actions.act_url',
                 # 'url': 'http://localhost:8069/web?debug=1#id=%s&action=153&model=crm.lead&view_type=form&menu_id=111'%self.crm_id.id,
