@@ -20,11 +20,9 @@ class CL(models.Model):
     # _sql_constraints = [
     #     ('crm_line_uniq', 'unique (order_id, product_id, select_categ_id)', 'order_id, product_id,select_categ_id must be unique !')]
 
-    
-
 
     product_uom_qty = fields.Float(string='Ordered Quantity', 
-        digits=dp.get_precision('Product Unit of Measure'), store=True, required=True, default=1.0, compute='_compute_product_uom_qty',readonly=False)
+        digits=dp.get_precision('Product Unit of Measure'), store=True, required=True, default=10.0, compute='_compute_product_uom_qty',readonly=False)
     partner_parent_id = fields.Many2one('res.partner')
     is_create_partner_parent_id = fields.Boolean(default=True)
 

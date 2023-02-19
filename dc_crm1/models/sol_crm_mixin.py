@@ -13,7 +13,7 @@ class SOLMixin(models.AbstractModel):
     _name = 'sol.crm.mixin'
 
     order_id = fields.Many2one('crm.lead', string='Cơ hội cha', ondelete='cascade', index=True, copy=False)
-    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
+    price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=100000.0)
     price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', readonly=True, store=True)
     price_tax = fields.Float(compute='_compute_amount', string='Total Tax', readonly=True, store=True)
     price_total = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=True)
