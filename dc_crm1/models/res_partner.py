@@ -25,7 +25,6 @@ class ResPartner(models.Model):
     is_control = fields.Boolean() 
     hobby = fields.Char('Sở thích')
     # birthdate = fields.Date()
-    
 
     # def name_get(self):
     #     res = []
@@ -100,14 +99,17 @@ class ResPartner(models.Model):
         res = []
         for partner in self:
             name = partner.name or ''
+            
+            if partner.phone:
+                name += ' | ' + partner.phone
+            if partner.phone2:
+                name += ' | ' + partner.phone2
             if partner.mobile:
                 name += ' | ' + partner.mobile
             if partner.mobile2:
                 name += ' | ' + partner.mobile2
             if partner.mobile3:
                 name += ' | ' + partner.mobile3
-            elif partner.phone:
-                name += ' | ' + partner.phone
             if partner.email:
                 name += ' | ' + partner.email
             if partner.comment:

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-07 17:19+0000\n"
-"PO-Revision-Date: 2023-02-07 17:19+0000\n"
+"POT-Creation-Date: 2023-02-20 10:52+0000\n"
+"PO-Revision-Date: 2023-02-20 10:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,27 @@ msgid "<i class=\"fa fa-ban\" style=\"color: red;\" role=\"img\" title=\"This em
 msgstr ""
 
 #. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "<span class=\"o_stat_text\"> Quotation(s) </span>"
+msgstr "<span class=\"o_stat_text\"> Báo giá </span>"
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "<span class=\"oe_edit_only\">\n"
+"                                Số nhà\n"
+"                            </span>"
+msgstr ""
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "<span class=\"oe_edit_only\">\n"
+"                                Đường\n"
+"                            </span>"
+msgstr ""
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__a1
 msgid "A1"
 msgstr ""
@@ -29,11 +50,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_stage__active
 msgid "Active"
 msgstr "Có hiệu lực"
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "Address"
-msgstr "Địa chỉ"
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__b1
@@ -53,6 +69,7 @@ msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__crm_id
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__crm_id
 msgid "CRM"
 msgstr ""
 
@@ -83,7 +100,7 @@ msgstr ""
 
 #. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.view_crm_case_opportunities_filter
-msgid "Cha & đơn"
+msgid "Cha & lẻ"
 msgstr ""
 
 #. module: dc_crm1
@@ -112,16 +129,16 @@ msgid "Chăm Sóc khách hàng sau bán hàng"
 msgstr ""
 
 #. module: dc_crm1
+#: selection:crm.lead,win_state:0
+msgid "Chưa thắng"
+msgstr ""
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__select_categ_id
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__select_categ_id
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__select_categ_id
 msgid "Chọn Nhóm SP"
 msgstr ""
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "City"
-msgstr "Thành phố"
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__company_id
@@ -132,13 +149,13 @@ msgid "Company"
 msgstr "Công ty"
 
 #. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "Company Name"
-msgstr "Tên Công ty"
-
-#. module: dc_crm1
 #: selection:crm.lead,type2:0
 msgid "Con"
+msgstr ""
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_crm_case_opportunities_filter
+msgid "Con & lẻ"
 msgstr ""
 
 #. module: dc_crm1
@@ -162,7 +179,7 @@ msgid "Convert to Opportunity"
 msgstr "Chuyển thành Cơ hội"
 
 #. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__country_id
 msgid "Country"
 msgstr "Quốc gia"
 
@@ -176,6 +193,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__create_uid
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__create_uid
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__create_uid
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__create_uid
 msgid "Created by"
 msgstr "Được tạo bởi"
 
@@ -184,6 +202,7 @@ msgstr "Được tạo bởi"
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__create_date
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__create_date
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__create_date
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__create_date
 msgid "Created on"
 msgstr "Thời điểm tạo"
 
@@ -204,11 +223,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin__currency_id
 msgid "Currency"
 msgstr "Tiền tệ"
-
-#. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__partner_id
-msgid "Customer"
-msgstr "Khách hàng"
 
 #. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
@@ -254,15 +268,30 @@ msgstr "Chiết khấu (%)"
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__display_name
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__display_name
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__display_name
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__display_name
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_crm_mixin__display_name
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin__display_name
 msgid "Display Name"
 msgstr "Tên hiển thị"
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__so_amount_total
-msgid "Doanh thu thực tế"
+#: code:addons/dc_crm1/models/crm_lead.py:264
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__district_id
+#, python-format
+msgid "District"
+msgstr "Quận/Huyện"
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__so_price_total
+msgid "Doanh thu"
 msgstr ""
+
+#. module: dc_crm1
+#: code:addons/dc_crm1/models/crm_lead.py:266
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__door
+#, python-format
+msgid "Door"
+msgstr "Ngõ"
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__crm_product_line_id
@@ -270,9 +299,25 @@ msgid "Dòng cơ hội gốc"
 msgstr ""
 
 #. module: dc_crm1
+#: model:ir.model.fields,help:dc_crm1.field_crm_lead__date_deadline
+msgid "Estimate of the date on which the opportunity will be won."
+msgstr "Dự kiến ngày mà cơ hội được đánh dấu là chiến thắng."
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__planned_revenue
 msgid "Expected Revenue"
 msgstr "Doanh thu Mong đợi"
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_res_partner__facebook
+#: model:ir.model.fields,field_description:dc_crm1.field_res_users__facebook
+msgid "Facebook"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__note
+msgid "Ghi chú"
+msgstr ""
 
 #. module: dc_crm1
 #: model:crm.stage,name:dc_crm1.stage_7
@@ -280,7 +325,15 @@ msgid "Giao hàng/ Chuyển giao"
 msgstr ""
 
 #. module: dc_crm1
+#: code:addons/dc_crm1/models/crm_lead.py:265
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__house
+#, python-format
+msgid "House"
+msgstr "Số nhà"
+
+#. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.create_so_wizard_form_view
+#: model_terms:ir.ui.view,arch_db:dc_crm1.pre_create_so_wizard_form_view
 msgid "Hủy"
 msgstr ""
 
@@ -289,9 +342,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__id
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__id
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__id
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__id
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_crm_mixin__id
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin__id
 msgid "ID"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_res_partner__is_control
+#: model:ir.model.fields,field_description:dc_crm1.field_res_users__is_control
+msgid "Is Control"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__is_create_partner_parent_id
+msgid "Is Create Partner Parent"
 msgstr ""
 
 #. module: dc_crm1
@@ -301,6 +366,7 @@ msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__connection_ids
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__parent_connection_ids
 msgid "LS xúc tiến"
 msgstr ""
 
@@ -309,6 +375,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard____last_update
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection____last_update
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report____last_update
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard____last_update
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_crm_mixin____last_update
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin____last_update
 msgid "Last Modified on"
@@ -319,6 +386,7 @@ msgstr "Sửa lần cuối vào"
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__write_uid
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__write_uid
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__write_uid
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Cập nhật lần cuối bởi"
 
@@ -327,6 +395,7 @@ msgstr "Cập nhật lần cuối bởi"
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__write_date
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__write_date
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__write_date
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__write_date
 msgid "Last Updated on"
 msgstr "Cập nhật lần cuối vào"
 
@@ -334,6 +403,11 @@ msgstr "Cập nhật lần cuối vào"
 #: selection:crm.lead,type:0
 msgid "Lead"
 msgstr "Tiềm năng"
+
+#. module: dc_crm1
+#: model:ir.model,name:dc_crm1.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Tiềm năng/Cơ hội"
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__line_ids
@@ -344,6 +418,17 @@ msgstr "Dòng"
 #: model:ir.model.fields,help:dc_crm1.field_crm_lead__partner_id
 msgid "Linked partner (optional). Usually created when converting the lead. You can find a partner by its Name, TIN, Email or Internal Reference."
 msgstr "Đối tác được liên kết (tùy chọn). Thường được dùng khi chuyển hóa khách hàng tiềm năng. Bạn có thể tìm đối tác theo Tên, MST, Email và mã nội bộ."
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_res_partner__Linkedin
+#: model:ir.model.fields,field_description:dc_crm1.field_res_users__Linkedin
+msgid "Linkedin"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__partner_id
+msgid "Liên hệ"
+msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__type2
@@ -362,9 +447,24 @@ msgid "Lịch sử xúc tiến"
 msgstr ""
 
 #. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "Lịch sử xúc tiến Cha"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__mobile
+msgid "Mobile"
+msgstr "Di động"
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__name
 msgid "Name"
 msgstr "Tên"
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__date_deadline
+msgid "Ngày dự kiến đóng"
+msgstr ""
 
 #. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.view_crm_case_opportunities_filter
@@ -414,9 +514,30 @@ msgid "Ordered Quantity"
 msgstr "Số lượng Đặt hàng"
 
 #. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_connection__parent_crm_id
+msgid "Parent Crm"
+msgstr ""
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__partner_id
 msgid "Partner"
 msgstr "Đối tác"
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__partner_parent_id
+msgid "Partner Parent"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__phone
+msgid "Phone"
+msgstr "Điện thoại"
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "Phường"
+msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__pricelist_id
@@ -447,9 +568,24 @@ msgid "Product attribute values that do not create variants"
 msgstr "Giá trị thuộc tính sản phẩm không tạo ra các biến thể"
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__qty_remain
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__qty_remain
-msgid "Qty Remain"
+#: model:ir.model.fields,field_description:dc_crm1.field_pre_create_so_wizard__qty_remain_fname
+msgid "Qty Remain Fname"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__quotation_qty_done
+msgid "Quotation Qty Done"
+msgstr ""
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "Quận"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__real_partner_id
+msgid "Real Partner"
 msgstr ""
 
 #. module: dc_crm1
@@ -481,13 +617,11 @@ msgid "Select category for the current product"
 msgstr "Chọn nhóm cho sản phẩm hiện tại"
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__so_price_total
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__so_price_total
 msgid "So Price Total"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__so_price_unit
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__so_price_unit
 msgid "So Price Unit"
 msgstr ""
@@ -503,19 +637,9 @@ msgid "Stage"
 msgstr "Giai đoạn"
 
 #. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
 msgid "State"
 msgstr "Tỉnh/TP"
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "Street 2..."
-msgstr "Địa chỉ, đường..."
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "Street..."
-msgstr "Địa chỉ..."
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__price_subtotal
@@ -536,24 +660,30 @@ msgid "Sản Phẩm/Nhóm (Con)"
 msgstr ""
 
 #. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "Sản Phẩm/Nhóm (Đơn)"
-msgstr ""
-
-#. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.view_crm_case_opportunities_filter
 msgid "Sản phẩm"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__sum_product_uom_qty
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__sum_product_uom_qty
-msgid "Số lượng dự kiến"
+#: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__quotation_qty_remain
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__quotation_qty_remain
+msgid "Số lượng báo giá còn lại"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__sum_qty_done
-msgid "Số lượng thực tế"
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "Số lượng báo giá đã tạo"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__qty_remain
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__qty_remain
+msgid "Số lượng còn lại"
+msgstr ""
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__sum_product_uom_qty
+msgid "Số lượng dự kiến"
 msgstr ""
 
 #. module: dc_crm1
@@ -563,13 +693,13 @@ msgid "Số lượng đã tạo đơn hàng"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__amount_by_group
-msgid "Tax amount by group"
-msgstr "Số tiền thuế theo nhóm"
+#: model:ir.model.fields,field_description:dc_crm1.field_res_partner__hobby
+#: model:ir.model.fields,field_description:dc_crm1.field_res_users__hobby
+msgid "Sở thích"
+msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__tax_id
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__amount_tax
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__tax_id
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_crm_mixin__tax_id
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin__tax_id
@@ -623,7 +753,6 @@ msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_line_wizard__price_total
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__amount_total
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__price_total
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__price_total
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_crm_mixin__price_total
@@ -638,6 +767,11 @@ msgstr "Tổng"
 #: model:ir.model.fields,field_description:dc_crm1.field_sol_mixin__price_tax
 msgid "Total Tax"
 msgstr "Tổng thuế"
+
+#. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__win_state
+msgid "Trạng thái thắng"
+msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__probability_id
@@ -655,6 +789,11 @@ msgid "Type is used to separate Leads and Opportunities"
 msgstr "Kiểu được sử dụng để tách riêng Tiềm năng và Cơ hội"
 
 #. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "Tên Công ty"
+msgstr ""
+
+#. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.create_so_wizard_form_view
 msgid "Tạo báo giá"
 msgstr ""
@@ -666,6 +805,7 @@ msgstr ""
 
 #. module: dc_crm1
 #: model:ir.actions.act_window,name:dc_crm1.create_so_wizard_action
+#: model:ir.actions.act_window,name:dc_crm1.pre_create_so_wizard_action
 #: model_terms:ir.ui.view,arch_db:dc_crm1.create_so_wizard_form_view
 msgid "Tạo đơn hàng"
 msgstr ""
@@ -678,6 +818,11 @@ msgstr ""
 #. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__rate
 msgid "Tỉ lệ chuyển đổi SL"
+msgstr ""
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "Tỉnh/ thành phố"
 msgstr ""
 
 #. module: dc_crm1
@@ -698,16 +843,6 @@ msgid "Unit of Measure"
 msgstr "Đơn vị tính"
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__amount_untaxed
-msgid "Untaxed Amount"
-msgstr "Tổng chưa thuế"
-
-#. module: dc_crm1
-#: model:ir.model.fields,help:dc_crm1.field_crm_lead__quotation_amount_total
-msgid "Untaxed Total of Confirmed Orders"
-msgstr "Tổng số đơn đặt hàng đã xác nhận chưa được xử lý"
-
-#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_crm_product_line_report__user_id
 msgid "User"
 msgstr "Người dùng"
@@ -721,21 +856,23 @@ msgid "User entered custom product attribute values"
 msgstr "Người dùng nhập giá trị thuộc tính sản phẩm tùy chỉnh"
 
 #. module: dc_crm1
-#: code:addons/dc_crm1/models/sol_crm_mixin.py:151
+#: code:addons/dc_crm1/models/crm_lead.py:263
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__ward_id
+#, python-format
+msgid "Ward"
+msgstr "Phường/Xã"
+
+#. module: dc_crm1
+#: code:addons/dc_crm1/models/sol_crm_mixin.py:156
 #: code:addons/dc_crm1/models/sol_mixin_new.py:143
 #, python-format
 msgid "Warning for %s"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__win_state
-msgid "Win State"
+#: model_terms:ir.ui.view,arch_db:dc_crm1.pre_create_so_wizard_form_view
+msgid "Xác nhận"
 msgstr ""
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "ZIP"
-msgstr "Mã bưu điện"
 
 #. module: dc_crm1
 #: model:ir.model,name:dc_crm1.model_create_partner_crm_wizard
@@ -749,17 +886,13 @@ msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model,name:dc_crm1.model_create_so_wizard
+#: model:ir.model,name:dc_crm1.model_pre_create_so_wizard
 msgid "create.so.wizard"
 msgstr ""
 
 #. module: dc_crm1
 #: model:ir.model,name:dc_crm1.model_crm_product_line
 msgid "crm.product.line"
-msgstr ""
-
-#. module: dc_crm1
-#: model:ir.model,name:dc_crm1.model_crm_lead
-msgid "crm_lead inherit"
 msgstr ""
 
 #. module: dc_crm1
@@ -773,11 +906,6 @@ msgstr ""
 #: model:ir.cron,name:dc_crm1.cronjob_send_summary_partner_every_day
 msgid "cronjob_send_summary_partner_every_day"
 msgstr ""
-
-#. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
-msgid "e.g. https://www.odoo.com"
-msgstr "vd: https://www.odoo.com"
 
 #. module: dc_crm1
 #: model:ir.actions.server,name:dc_crm1.action_server_open_tl_report_wizard_crm_filter
@@ -811,13 +939,18 @@ msgid "omicall_history refresher"
 msgstr ""
 
 #. module: dc_crm1
-#: sql_constraint:crm.lead:0
-msgid "order_id, product_id,select_categ_id must be unique !"
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+msgid "open"
 msgstr ""
 
 #. module: dc_crm1
-#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_lead_inherit_tree123_view
-msgid "so_amount_total"
+#: selection:pre.create.so.wizard,qty_remain_fname:0
+msgid "qty_remain"
+msgstr ""
+
+#. module: dc_crm1
+#: selection:pre.create.so.wizard,qty_remain_fname:0
+msgid "quotation_qty_remain"
 msgstr ""
 
 #. module: dc_crm1
@@ -831,9 +964,10 @@ msgid "sol.mixin"
 msgstr ""
 
 #. module: dc_crm1
-#: model:ir.model.fields,help:dc_crm1.field_crm_lead__amount_by_group
-msgid "type: [(name, amount, base, formated amount, formated base)]"
-msgstr "loại: [(tên, tổng, cơ sở, tổng đã chỉnh, cơ sở đã chỉnh)]"
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "vd: https://www.odoo.com"
+msgstr ""
 
 #. module: dc_crm1
 #: model_terms:ir.ui.view,arch_db:dc_crm1.create_so_wizard_form_view
@@ -841,7 +975,18 @@ msgid "Đi tới cửa sổ đơn hàng"
 msgstr ""
 
 #. module: dc_crm1
+#: model:ir.model.fields,field_description:dc_crm1.field_crm_lead__so_price_unit
+msgid "Đơn giá trung bình ở đơn hàng"
+msgstr ""
+
+#. module: dc_crm1
 #: model:ir.model.fields,field_description:dc_crm1.field_create_so_wizard__sale_order_id
 msgid "Đơn hàng được tạo"
+msgstr ""
+
+#. module: dc_crm1
+#: model_terms:ir.ui.view,arch_db:dc_crm1.crm_case_form_view_oppor
+#: model_terms:ir.ui.view,arch_db:dc_crm1.view_partner_form
+msgid "Địa chỉ"
 msgstr ""
 

@@ -20,7 +20,7 @@ class CL(models.Model):
     # _sql_constraints = [
     #     ('crm_line_uniq', 'unique (order_id, product_id, select_categ_id)', 'order_id, product_id,select_categ_id must be unique !')]
 
-
+    date_deadline = fields.Date('Ngày dự kiến đóng')
     product_uom_qty = fields.Float(string='Ordered Quantity', 
         digits=dp.get_precision('Product Unit of Measure'), store=True, required=True, default=10.0, compute='_compute_product_uom_qty',readonly=False)
     partner_parent_id = fields.Many2one('res.partner')
@@ -74,7 +74,7 @@ class CL(models.Model):
     sol_ids = fields.One2many('sale.order.line', 'crm_product_line_id')
     type2 = fields.Selection([('child','Con'), ('parent','Cha'), ('independ', 'Lẻ')], string='Loại quan hệ', compute='_compute_type2', store=True)
     confirmed_sale_number = fields.Integer(compute='_compute_sale_amount_total', string="Number of Quotations")
-    quotation_amount_total = fields.Monetary(compute='_compute_sale_amount_total', string="Sum of Orders", help="Untaxed Total of Confirmed Orders", currency_field='company_currency')
+    quotation_amount_total = fields.Monetary(compute='_compute_sale_amount_total', string="Sum of Orders", currency_field='company_currency')
     @api.depends('order_ids')
     def _compute_sale_amount_total(self):
         for lead in self:

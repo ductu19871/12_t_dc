@@ -26,7 +26,7 @@ class CreatePartnerCrmWizard(models.TransientModel):
     active_ids = fields.Char(default = lambda self: self._context.get('active_ids'))
     create_contact_type_id = fields.Many2one('dc.selection', string='Hành động')
     dc_selection_ids = fields.Many2many('dc.selection', compute='_compute_dc_selection_ids')
-    # select_partner_ids = fields.Many2many('res.partner', string='Chọn khách hàng để tạo cơ hội', domain="[('id','in',look_partner_ids)]",
+    # select_partner_ids = create_contact_type_idfields.Many2many('res.partner', string='Chọn khách hàng để tạo cơ hội', domain="[('id','in',look_partner_ids)]",
     #      help='Trong trường hợp có nhiều hơn khách hàng tương ứng với số điện thoại này')#, default=default_partner_ids
     # len_partner_ids = fields.Integer(compute='_compute_len_partner_ids', )
     # partner_id = fields.Many2one('res.partner', compute='_compute_partner_id')
@@ -48,7 +48,7 @@ class CreatePartnerCrmWizard(models.TransientModel):
     def _compute_is_show_create_contact_type_button(self):
         if self.create_contact_type_id.code in ('create_contact',):
             self.is_show_create_contact_button = True
-        elif self.create_contact_type_id.code in ('update_phone','update_mobile','create_sub_phone','create_sub_mobile','update_mobile2','update_mobile3',):
+        elif self.create_contact_type_id.code in ('update_phone','update_phone2','update_mobile','create_sub_phone','create_sub_mobile','update_mobile2','update_mobile3',):
             self.is_show_update_contact_button = True
         elif self.create_contact_type_id.code in ('create_crm',):
             self.is_show_create_crm_button = True
@@ -75,6 +75,8 @@ class CreatePartnerCrmWizard(models.TransientModel):
             elif self.updated_partner_id:
                 if not self.updated_partner_id.phone:
                     ids.append('update_phone')
+                elif self.updated_partner_id.phone  and not  self.updated_partner_id.phone2:
+                    ids.append('update_phone2')
                 if not self.updated_partner_id.mobile:
                     ids.append('update_mobile')
                 elif self.updated_partner_id.mobile and not self.updated_partner_id.mobile2:
@@ -157,6 +159,8 @@ class CreatePartnerCrmWizard(models.TransientModel):
                     })
                 elif self.create_contact_type_id.code == 'update_phone':
                     partner.phone = self.phone_number
+                elif self.create_contact_type_id.code == 'update_phone2':
+                    partner.phone2 = self.phone_number
                 elif self.create_contact_type_id.code == 'update_mobile':
                     partner.mobile = self.phone_number
                 elif self.create_contact_type_id.code == 'update_mobile2':

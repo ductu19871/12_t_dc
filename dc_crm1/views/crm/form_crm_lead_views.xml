@@ -321,7 +321,7 @@
                             <field name="select_categ_id" />
                             <field name="product_uom_qty" />
                             <field name="qty_done" />
-                            <field name="quotation_qty_done" />
+                            <field name="quotation_qty_done" string="Số lượng báo giá đã tạo"/>
                             <field name="qty_remain" />
                             <field name="quotation_qty_remain" />
                             <field name="product_uom" />

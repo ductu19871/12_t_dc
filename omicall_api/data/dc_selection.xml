@@ -5,6 +5,7 @@
         <field name="name">Tạo tiềm năng</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
+        <!-- <field name="sequence">1</field> -->
     </record>
 
 
@@ -29,11 +30,21 @@
         <field name="type">update_phone_number</field>
     </record>
     
+    <record id="dc_selection_2ext1" model="dc.selection">
+        <field name="code">update_phone2</field>
+        <field name="name">Tạo số điện thoại 2 (phone2)</field>
+        <field name="model">res.partner</field>
+        <field name="type">update_phone_number</field>
+        <field name="sequence">5</field>
+    </record>
+
+
     <record id="dc_selection_3" model="dc.selection">
         <field name="code">update_mobile</field>
         <field name="name">Tạo di động (mobile)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
+        <field name="sequence">6</field>
     </record>
 
     <record id="dc_selection_3ext1" model="dc.selection">
@@ -41,6 +52,7 @@
         <field name="name">Tạo di động (mobile2)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number2</field>
+        <field name="sequence">7</field>
     </record>
 
 
@@ -49,6 +61,7 @@
         <field name="name">Tạo di động (mobile3)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number3</field>
+        <field name="sequence">8</field>
     </record>
 
 
@@ -57,6 +70,7 @@
         <field name="name">Tạo SĐT phụ (phone)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
+        <field name="sequence">9</field>
     </record>
 
     <record id="dc_selection_5" model="dc.selection">
@@ -64,6 +78,7 @@
         <field name="name">Tạo di động phụ (mobile)</field>
         <field name="model">res.partner</field>
         <field name="type">update_phone_number</field>
+        <field name="sequence">10</field>
     </record>
     
     <!-- <record id="dc_selection_tl_report_wizard_0" model="dc.selection">

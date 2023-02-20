@@ -13,12 +13,19 @@ class ResPartner(models.Model):
     _inherit = ['res.partner','mail.thread']
 
     mobile_one = fields.Char(compute='_compute_mobile_one')
+    phone_one = fields.Char(compute='_compute_phone_one')
 
     def _compute_mobile_one(self):
         for r in self:
             # r.mobile_one = r.mobile or r.mobile2 or r.mobile3 
             r.mobile_one = '|'.join([i for i in (r.mobile,r.mobile2,r.mobile3) if i])
+    
+    def _compute_phone_one(self):
+        for r in self:
+            # r.mobile_one = r.mobile or r.mobile2 or r.mobile3 
+            r.phone_one = '|'.join([i for i in (r.phone,r.phone2) if i])
 
+    phone2 = fields.Char('Điện thoại 2')
     mobile2 = fields.Char('Di động 2')
     mobile3 = fields.Char('Di động 3')
     dc_crm_ids = fields.One2many('crm.lead', 'partner_id', string='Crm')
